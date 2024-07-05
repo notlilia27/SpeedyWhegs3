@@ -12,6 +12,7 @@ int pinCS = 10; // Pin 10 on Arduino Uno
 https://github.com/jrowberg/i2cdevlib
 //
 // Changelog:
+// 2024-07-04 - Copied code base onto github SpeedyWhegs3
 // 2019-07-08 - Added Auto Calibration and offset generator
 // - and altered FIFO retrieval sequence to avoid using blocking code
 // 2016-04-18 - Eliminated a potential infinite loop
