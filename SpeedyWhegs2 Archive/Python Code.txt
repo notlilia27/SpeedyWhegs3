@@ -1,0 +1,40 @@
+2. Python Code
+2.1 Important Note
+The following section 2.2 details the commands sent to the ODrive for only one channel (one motor). Every command that addresses axis0 needs to be duplicated with a that same command that addresses axis1.
+2.2 Setting ODrive Configuration Parameters
+odrivetool
+odrv0.vbus_voltage
+odrv0.config.brake_resistance=2
+odrv0.axis0.motor.config.pole_pairs=7
+odrv0.axis0.motor.config.torque_constant=8.27/100
+odrv0.axis0.motor.config.motor_type=MOTOR_TYPE_HIGH_CURRENT
+odrv0.axis0.encoder.config.cpr=8192
+odrv0.axis0.motor.config.calibration_current=15
+odrv0.axis0.motor.config.current_lim=30
+odrv0.axis0.controller.config.vel_limit=40
+odrv0.axis0.controller.config.vel_ramp_rate = 10
+odrv0.axis0.config.startup_motor_calibration
+odrv0.axis0.config.startup_encoder_index_search
+odrv0.axis0.config.startup_encoder_offset_calibration
+odrv0.axis0.config.startup_closed_loop_control
+odrv0.axis0.controller.config.control_mode=CONTROL_MODE_VELOCITY_CONTROL
+odrv0.axis0.controller.config.input_mode= INPUT_MODE_VEL_RAMP
+//OR
+//odrv0.axis0.controller.config.input_mode= INPUT_MODE_PASSTHROUGH
+//OR choose torque/position control modes
+odrv0.config.gpio4_pwm_mapping.min = 0
+odrv0.config.gpio4_pwm_mapping.max = -30
+odrv0.config.gpio4_pwm_mapping.endpoint = odrv0.axis1.controller._remote_attributes['input_vel']
+//Note: you can disable the input by setting
+//odrv0.config.gpio4_pwm_mapping.endpoint = None
+//Otherwise you cannot manually input. DON’T FORGET TO SAVE AND REBOOT
+//NEGATIVE +30 FOR THE OTHER AXIS
+odrv0.save_configuration()
+odrv0.reboot()
+2.3 Helpful Debugging Commands
+dump_errors(odrv0)
+odrv0.axis0.motor.is_calibrated
+odrv0.axis0.encoder.is_ready
+odrv0.axis0.current_state
+odrv0.axis0.motor.current_control.Iq_setpoint
+odrv0.axis0.motor.current_control.Iq_measured
